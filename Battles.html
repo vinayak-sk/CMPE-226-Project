@@ -9,6 +9,88 @@
     <link href="css/signin.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script>
+
+          function displayWinner() {
+              $.ajax({
+                  type: "POST",
+                  url: "battles.php",
+                  data: { action:"getWinner", user1: $('#User1Id').val(), user2: $('#User2Id').val(), pokemon1: $('#Pokemon1Id').val(),pokemon2: $('#Pokemon2Id').val()}
+              }).done(function( msg ) {
+
+                  //alert("here");
+                  alert( "Data Saved: " + JSON.stringify(msg) );
+              });
+          }
+
+          function fetchUser(user_number) {
+              if(user_number == 1) {
+                  var user = $('#User1Id').val();
+              } else {
+                  var user = $('#User2Id').val();
+              }
+
+              $.ajax({
+                  type: "POST",
+                  url: "battles.php",
+                  data: { action:"fetchUser", user1: user }
+              }).done(function( data ) {
+
+                
+                $.each(data, function(key,value) {
+                  var div_data="<option value=\""+value+"\">"+value+"</option>";
+                  
+                  if(user_number == 1) {
+                    $(div_data).appendTo('#Pokemon1Id'); 
+                  } else {
+                    $(div_data).appendTo('#Pokemon2Id'); 
+                  }
+                })
+                
+              });
+          }
+
+
+          function fetchUserData(user_number) {
+              if(user_number == 1) {
+                  var user = $('#User1Id').val();
+                  var pokemon = $('#Pokemon1Id').find(":selected").text();
+              } else {
+                  var user = $('#User2Id').val();
+                  var pokemon = $('#Pokemon2Id').find(":selected").text();
+              }
+
+              $.ajax({
+                  type: "POST",
+                  url: "battles.php",
+                  data: { action:"fetchUserData", user1: user, pokemon1: pokemon }
+              }).done(function( data ) {
+
+                  if(user_number == 1) {
+                      $('#User1Name').text(data[1]);
+                      $('#User1Pokemon').text(data[0]);
+                  } else {
+                      $('#User2Name').text(data[1]);
+                      $('#User2Pokemon').text(data[0]);
+                  }
+                  
+                 // alert(JSON.stringify(data[0]));
+                // $.each(data, function(key,value) {
+                //   var div_data="<option value=\""+value+"\">"+value+"</option>";
+                  
+                //   if(user_number == 1) {
+                //     $('#User1Name').val()
+                //     $(div_data).appendTo('#Pokemon1Id'); 
+                //   } else {
+                //     $(div_data).appendTo('#Pokemon2Id'); 
+                //   }
+                // })
+                
+              });
+          }
+
+
+      </script>
   </head>
 
   <body>
@@ -24,7 +106,7 @@
     	<div class="col-md-1">
     		
     	</div>
-    	
+
         <div class="col-md-10 block-2">
             <div class="row">
                 <h4> Please Enter User Id's and Pokemon Id's</h4>
@@ -35,7 +117,7 @@
                 <h4> User ID 1</h4>
               </div>
               <div class="col-md-4">
-                <input type="text" id="User1Id" class="form-control" required autofocus>
+                <input type="text" id="User1Id" class="form-control" required autofocus >
               </div>
               <div class="col-md-2" align="right">
                 <h4> User ID 2</h4>
@@ -49,12 +131,12 @@
               <div class="col-md-2">
               </div>
               <div class="col-md-4">
-                <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center">Fetch User 1's Pokemon list</button>
+                <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchUser(1)">Fetch User 1's Pokemon list</button>
               </div>
               <div class="col-md-2">
               </div>
               <div class="col-md-4">
-                <button id="fetchPokemon2" type="button" class="btn btn-primary" align="center">Fetch User 2's Pokemon list</button>
+                <button id="fetchPokemon2" type="button" class="btn btn-primary" align="center" onclick="fetchUser(2)">Fetch User 2's Pokemon list</button>
               </div>
             </div>
 
@@ -63,13 +145,18 @@
                 <h5> Pokemon ID for First User</h5>
               </div>
               <div class="col-md-4">
-                <input type="text" id="Pokemon1Id" class="form-control" required >
+                <select id="Pokemon1Id" >
+                  <option value="select">Select</option>
+                </select>
+                
               </div>
               <div class="col-md-2" align="right">
                 <h5> Pokemon ID for Second User</h5>
               </div>
               <div class="col-md-4">
-                <input type="text" id="Pokemon2Id" class="form-control" required >
+                 <select id="Pokemon2Id" >
+                  <option value="select">Select</option>
+                </select>
               </div>
             </div>
 
@@ -77,12 +164,12 @@
               <div class="col-md-2">
               </div>
               <div class="col-md-4">
-                <button id="fetchUser1Data" type="button" class="btn btn-primary" align="center">Fetch User 1's Data</button>
+                <button id="fetchUser1Data" type="button" class="btn btn-primary" align="center" onclick="fetchUserData(1)">Fetch User 1's Data</button>
               </div>
               <div class="col-md-2">
               </div>
               <div class="col-md-4">
-                <button id="fetchUser2Data" type="button" class="btn btn-primary" align="center">Fetch User 2's Data</button>
+                <button id="fetchUser2Data" type="button" class="btn btn-primary" align="center" onclick="fetchUserData(2)">Fetch User 2's Data</button>
               </div>
             </div>
 
@@ -132,7 +219,7 @@
               <div class="col-md-5">
               </div>
               <div class="col-md-2">
-                <button type="button" class="btn btn-success btn-lg" align="center">Battle</button>
+                <button type="button" class="btn btn-success btn-lg" align="center" onclick="displayWinner()">Battle</button>
               </div>
               <div class="col-md-5">
               </div>
