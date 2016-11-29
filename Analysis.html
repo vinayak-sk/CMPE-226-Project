@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="CMPE226 Project">
+    <meta name="author" content="Chaotic Coders">
+
+    <title>Pokemon</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      var quarter1 = 8;
+      var quarter2 = 10;
+      var quarter3 = 12;
+      var quarter4 = 14;
+
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+         ['Quarter', 'Battle Per Quarter', { role: 'style' }],
+         ['Quarter 1', quarter1, '#4285f4'],
+         ['Quarter 2', quarter2, '#4285f4'],
+         ['Quarter 3', quarter3, '#4285f4'],
+         ['Quarter 4', quarter4, '#4285f4' ],
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Quarterly Analysis',
+          },
+          bars: 'horizontal'
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, options);
+      }
+
+      function fetchYearlyData() {
+              var year = $( "#year" ).val();
+              $.ajax({
+                  type: "POST",
+                  url: "battles.php",
+                  data: { action:"fetchYearlyData", year: year }
+              }).done(function( data ) {
+
+                
+                $.each(data, function(key,value) {
+                  
+                })
+                drawChart();
+                //chart.draw(data, options);
+              });
+      }
+    </script>
+  </head>
+
+  <body>
+
+  <div class="row heading">
+    <h2> <p align="center"> <label class="title" align="center"> Analysis </label> </p> </h2>
+  </div>
+
+  <div class="row">
+    <div class="container">
+    
+        <div class="col-md-1">
+        </div>
+
+        <div class="col-md-10 block-2">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs tabs-heading" role="tablist">
+            <li role="presentation" class="active tab-titles"><a href="#battle" aria-controls="home" role="tab" data-toggle="tab">Battle Quarterly Analysis</a></li>
+            <li role="presentation" class="tab-titles"><a href="#2" aria-controls="profile" role="tab" data-toggle="tab">Analysis 2</a></li>
+            <li role="presentation" class="tab-titles"><a href="#3" aria-controls="messages" role="tab" data-toggle="tab">Analysis 3</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="battle">
+              <div class="row">
+                <div class="col-md-2">
+                  <h4> Enter Year </h4>
+                </div>               
+                <div class="col-md-4">
+                  <input type="text" id="year" class="form-control" required autofocus >
+                </div> 
+                <div class="col-md-4">
+                    <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchYearlyData()">Fetch Data</button>
+                </div>
+              </div>
+              <div class="row">
+                <div id="barchart_material" style="width: 800px; height: 400px;"></div>
+              </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="2">
+              Data displayed based on tab selected <br/> 
+            </div>
+            <div role="tabpanel" class="tab-pane" id="3">
+              Data displayed based on tab selected <br/> 
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-1">
+        </div>
+
+    </div> <!-- /container -->
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    $('#myTabs a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+  </script>
+  </body>
+</html>
