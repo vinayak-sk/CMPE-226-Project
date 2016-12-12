@@ -22,8 +22,6 @@ if($_POST["action"] == "getWinner") {
     fetchUser($_POST['user1']);
 } else if($_POST["action"] == "fetchUserData") {
     fetchUserData($_POST['user1'], $_POST['pokemon1']);
-} else if($_POST["action"] == "registerUser") {
-    registerUser($_POST['data']);
 }
 
 function getWinner($user1, $user2, $pokemon1, $pokemon2) {
@@ -137,75 +135,6 @@ function fetchUserData($user_id, $pokemon_id) {
        // $index++;
         array_push($pokemons,$row['pokemon_name']);
         array_push($pokemons,$row['name']);
-    }
-
-    header('Content-type: application/json');
-    echo json_encode($pokemons);
-}
-
-function registerUser($data) {
-
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "sesame";
-    $dbname = "cmpe226_operational";
-
-    $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $pokemons = array();
-
-    //$index = 0;
-    foreach($connection->query('SELECT p.pokemon_name as pokemon_name, u.name as name FROM User_Pokedex upx, User u, Pokemons p WHERE upx.pokemon_id=p.pokemon_id AND u.user_id = upx.user_id AND upx.pokemon_id='.$pokemon_id.' AND upx.user_id='.$user_id.'') as $row) {
-    
-    }
-
-    header('Content-type: application/json');
-    echo json_encode($pokemons);
-}
-
-function loginUser($data) {
-
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "sesame";
-    $dbname = "cmpe226_operational";
-
-    $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $pokemons = array();
-
-    //$index = 0;
-    foreach($connection->query('SELECT p.pokemon_name as pokemon_name, u.name as name FROM User_Pokedex upx, User u, Pokemons p WHERE upx.pokemon_id=p.pokemon_id AND u.user_id = upx.user_id AND upx.pokemon_id='.$pokemon_id.' AND upx.user_id='.$user_id.'') as $row) {
-    
-    }
-
-    header('Content-type: application/json');
-    echo json_encode($pokemons);
-}
-
-function buyItems($data) {
-
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "sesame";
-    $dbname = "cmpe226_operational";
-
-    $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $pokemons = array();
-
-    //$index = 0;
-    foreach($connection->query('SELECT p.pokemon_name as pokemon_name, u.name as name FROM User_Pokedex upx, User u, Pokemons p WHERE upx.pokemon_id=p.pokemon_id AND u.user_id = upx.user_id AND upx.pokemon_id='.$pokemon_id.' AND upx.user_id='.$user_id.'') as $row) {
-    
     }
 
     header('Content-type: application/json');
