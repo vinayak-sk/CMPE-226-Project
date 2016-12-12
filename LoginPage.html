@@ -64,13 +64,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
   <script type="text/javascript">
-    $( "#login" ).click(function(e) {
-      var id = document.getElementById("inputLoginId").value;
-      var password = document.getElementById("inputPassword").value;
-      if(id=="sjsu" && password=="sjsu"){
-        url = 'LandingPage.html' // + encodeURIComponent(score);
-        document.location.href = url;
-      }
+              $.ajax({
+                  type: "POST",
+                  url: "battles.php",
+                  data: { action:"fetchYearlyData", year: year }
+              }).done(function( data ) {
+                  alert("success");
+              });
   });
   </script>
 
