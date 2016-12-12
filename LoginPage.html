@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="CMPE226 Project">
+    <meta name="author" content="Chaotic Coders">
+
+    <title>Pokemon Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+  <div class="row">
+    <h2> <p align="center"> <label class="heading" align="center"> User Login </label> </p> </h2>
+  </div>
+
+  <div class="row">
+    <div class="container">
+    
+        <div class="col-md-4 col-md-3">
+        </div>
+
+        <div class="col-md-6">
+
+          <form class="form-signin">
+
+            <div class="row">
+              <div class="">
+                  <input type="email" id="inputLoginId" class="form-control" placeholder="Login Id" required autofocus>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="">
+                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              </div>
+            </div>
+
+            <br/>
+
+            <div class="row">
+              <div class="col-md-6">
+                <p><a href="">Create Acount/Forgot?</a></p>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-lg btn-info btn-block" type="submit" id="login">Login</button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+
+        <div class="col-md-3">
+        </div>
+
+    </div> <!-- /container -->
+  </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script type="text/javascript">
+    $( "#login" ).click(function(e) {
+      var id = document.getElementById("inputLoginId").value;
+      var password = document.getElementById("inputPassword").value;
+      if(id=="sjsu" && password=="sjsu"){
+        url = 'LandingPage.html' // + encodeURIComponent(score);
+        document.location.href = url;
+      }
+  });
+  </script>
+
+  </body>
+</html>

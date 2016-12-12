@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="CMPE226 Project">
+    <meta name="author" content="Chaotic Coders">
+
+    <title>Marketplace</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+  </head>
+
+<body>
+
+	<div class="row">
+		<h2> <p align="center"> <label class="heading" align="center"> Buy Items </label> </p> </h2>
+	</div>
+
+	<div class="row">
+	    <div class="container">
+	    
+	        <div class="col-md-1">
+	        </div>
+
+	        <div class="col-md-11">
+
+	        	<div class="row" id="alertErrors" style="padding-left: 270px; padding-right: 280px;">
+				</div>
+
+	        	<form method="post" action="LandingPage.html">
+
+		            <div class="row">
+		            	<div class="col-md-3" align="right">
+			            	<h5> Pokemon Eggs $5 per Egg</h5>
+			            </div>
+		            	<div class="col-md-6">
+		                	<input type="text" id="eggs" class="form-control" autofocus>
+		            	</div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Incense Sticks $2 per Stick</h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<div class="row" style="padding-right:10px; padding-left: 10px;">
+								<input type="text" id="sticks" class="form-control">
+							</div>
+			            </div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Pokeballs $1 per Pokeball</h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<input type="password" id="pokeballs" class="form-control" >
+			            </div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Coins $1 per 10 coins</h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<input type="email" id="coins" class="form-control">
+			            </div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Potions $5 per Potion</h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<input type="email" id="potions" class="form-control">
+			            </div>
+		            </div> 
+
+		            <div class="row">
+		            	<div class="col-md-3">
+		            	</div>
+			            <div class="col-md-3">
+			            	<button class="btn btn-lg btn-info btn-block" type="submit" value="Submit" id="register">Buy</button>
+			            </div>
+			            <div class="col-md-3">
+			            	<button class="btn btn-lg btn-info btn-block" id="cancel">Cancel</button>
+			            </div>
+		            </div>
+
+	        	</form>
+
+	        </div>
+
+	    </div> <!-- /container -->
+	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

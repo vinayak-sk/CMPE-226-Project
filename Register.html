@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="CMPE226 Project">
+    <meta name="author" content="Chaotic Coders">
+
+    <title>Registration Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+  </head>
+
+<body>
+
+	<div class="row">
+		<h2> <p align="center"> <label class="heading" align="center"> Register </label> </p> </h2>
+	</div>
+
+	<div class="row">
+	    <div class="container">
+	    
+	        <div class="col-md-1">
+	        </div>
+
+	        <div class="col-md-11">
+
+	        	<div class="row" id="alertErrors" style="padding-left: 270px; padding-right: 280px;">
+				</div>
+
+	        	<form method="post" action="LandingPage.html">
+
+		            <div class="row">
+		            	<div class="col-md-3" align="right">
+			            	<h5> User ID </h5>
+			            </div>
+		            	<div class="col-md-6">
+		                	<input type="text" id="inputUserId" class="form-control" required autofocus>
+		            	</div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Password </h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<div class="row" style="padding-right:10px; padding-left: 10px;">
+								<input type="password" id="inputPassword" href="#popupPassword" role="button" class="form-control" data-modal-position="relative" data-toggle="modal-popover" data-placement="right" required>
+									 
+									<!-- Define content -->
+									<div id="popupPassword" class="popover" style="width: 250px;">
+									    <div class="arrow"></div>
+									    <h3 class="popover-title">Password Strength</h3>
+									    <div class="popover-content">
+									    	<div class="row">
+									    		 <p> 
+									    		 	<span id="cond1False" class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span> 
+									    		 	<span id="cond1True" style="visibility:hidden;" class="glyphicon glyphicon-ok alert-success" aria-hidden="true"></span>
+									    		 	1 upper-case letter
+									    		 </p>
+									    	</div>
+									    	<div class="row">
+									    		<p>
+									    			<span id="cond2False" class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>
+									    			<span id="cond2True" style="visibility:hidden;" class="glyphicon glyphicon-ok alert-success" aria-hidden="true"></span>
+									    			1 lower-case letter
+									    		</p>
+									    	</div>
+									    	<div class="row">
+									    		<p>
+									    			<span id="cond3False" class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>
+									    			<span id="cond3True" style="visibility:hidden;" class="glyphicon glyphicon-ok alert-success" aria-hidden="true"></span>
+									    			1 number
+									    		</p>
+									    	</div>
+									    	<div class="row">
+									    		<p>
+									    			<span id="cond4False" class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>
+									    			<span id="cond4True" style="visibility:hidden;" class="glyphicon glyphicon-ok alert-success" aria-hidden="true"></span>
+									    			7-20 characters
+									    		</p>
+									    	</div>
+									    	<div class="row">
+									    		<p>
+									    			<span id="cond5False" class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>
+									    			<span id="cond5True" style="visibility:hidden;" class="glyphicon glyphicon-ok alert-success" aria-hidden="true"></span>
+									    			1 special character (!,#,$,%)
+									    		</p>
+									    	</div>
+									    	<div class="row">
+									    		<p>
+									    			<span id="cond6False" class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>
+									    			<span id="cond6True" style="visibility:hidden;" class="glyphicon glyphicon-ok alert-success" aria-hidden="true"></span>
+									    			Password cannot be same as user ID or have spaces
+									    		</p>
+									    	</div>
+									    </div>
+									</div>
+							</div>
+
+							<div class="row" style="padding-right:10px; padding-left: 10px;">
+								<progress id="progressBar" class="progress" value="0" max="100"></progress>
+							</div>
+							<div>
+								<strong id="weak" style=" padding-left: 80px;">Weak</strong>
+								<strong id="strong" style=" padding-left: 220px; visibility: hidden">Strong</strong>
+							</div>
+
+			            </div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Verify Password </h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<input type="password" id="inputVerifyPassword" class="form-control" required>
+			            </div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Email ID </h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<input type="email" id="inputEmailID" class="form-control" required>
+			            </div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Verify Email ID </h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<input type="email" id="inputVerifyEmailID" class="form-control" required>
+			            </div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Device Type </h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<select id="deviceType" class="form-control">
+			            		<option value="Android">Android</option>
+								<option value="iOS">iOS</option>
+			            	</select>
+			            </div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Payment Method </h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<!--input type="text" id="inputSequrityQuestion2" class="form-control" list="questions"-->
+			            	<select id="paymentMethod" class="form-control">
+			            		<option value="Credit Card">Credit Card</option>
+								<option value="Debit Card">Debit Card</option>
+			            	</select>
+			            </div>
+		            </div>
+
+		            <div class="row">
+			            <div class="col-md-3" align="right">
+			            	<h5> Mobile </h5>
+			            </div>
+			            <div class="col-md-6">
+			            	<input type="tel" id="inputMobile" class="form-control">
+			            </div>
+		            </div>
+
+		            
+
+		            <div class="row">
+		            	<div class="col-md-3">
+		            	</div>
+			            <div class="col-md-3">
+			            	<button class="btn btn-lg btn-info btn-block" type="submit" value="Submit" id="register">Register</button>
+			            </div>
+			            <div class="col-md-3">
+			            	<button class="btn btn-lg btn-info btn-block" id="cancel">Cancel</button>
+			            </div>
+		            </div>
+
+	        	</form>
+
+	        </div>
+
+	    </div> <!-- /container -->
+	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-modal-popover.js"></script>
+<script src="js/register.js"></script>
+
+</body>
+</html>
