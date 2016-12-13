@@ -21,7 +21,7 @@
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+      function drawChart(quarter1, quarter2, quarter3, quarter4) {
         var data = google.visualization.arrayToDataTable([
          ['Quarter', 'Battle Per Quarter', { role: 'style' }],
          ['Quarter 1', quarter1, '#4285f4'],
@@ -38,23 +38,58 @@
         };
 
         var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+        var yearly_chart = new google.charts.Bar(document.getElementById('yearly_chart'));
 
         chart.draw(data, options);
+
+        yearly_chart.draw(data, options);
+
+      }
+
+      function fetchQuarterlyData() {
+              var year = $( "#year" ).val();
+              alert(year);
+              $.ajax({
+                  type: "POST",
+                  url: "olap.php",
+                  data: { action:"getQuarterlyCount", year: year }
+              }).done(function( data ) {
+
+                //alert("here");
+                //alert(JSON.stringify(data));
+                //alert(data[0]);
+                quarter1 = data[0];
+                quarter2 = data[1];
+                quarter3 = data[2];
+                quarter4 = data[3];
+                $.each(data, function(key,value) {
+                  //array.push(value);
+                })
+                drawChart(quarter1,quarter2,quarter3,quarter4);
+                //chart.draw(data, options);
+              });
       }
 
       function fetchYearlyData() {
               var year = $( "#year" ).val();
+              alert(year);
               $.ajax({
                   type: "POST",
-                  url: "battles.php",
-                  data: { action:"fetchYearlyData", year: year }
+                  url: "olap.php",
+                  data: { action:"getQuarterlyCount", year: year }
               }).done(function( data ) {
 
-                
+                //alert("here");
+                //alert(JSON.stringify(data));
+                //alert(data[0]);
+                quarter1 = data[0];
+                quarter2 = data[1];
+                quarter3 = data[2];
+                quarter4 = data[3];
                 $.each(data, function(key,value) {
-                  
+                  //array.push(value);
                 })
-                drawChart();
+                drawChart(quarter1,quarter2,quarter3,quarter4);
                 //chart.draw(data, options);
               });
       }
@@ -77,7 +112,7 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs tabs-heading" role="tablist">
             <li role="presentation" class="active tab-titles"><a href="#battle" aria-controls="home" role="tab" data-toggle="tab">Battle Quarterly Analysis</a></li>
-            <li role="presentation" class="tab-titles"><a href="#2" aria-controls="profile" role="tab" data-toggle="tab">Analysis 2</a></li>
+            <li role="presentation" class="tab-titles"><a href="#2" aria-controls="profile" role="tab" data-toggle="tab">Yearly Battles</a></li>
             <li role="presentation" class="tab-titles"><a href="#3" aria-controls="messages" role="tab" data-toggle="tab">Analysis 3</a></li>
           </ul>
 
@@ -92,7 +127,7 @@
                   <input type="text" id="year" class="form-control" required autofocus >
                 </div> 
                 <div class="col-md-4">
-                    <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchYearlyData()">Fetch Data</button>
+                    <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchQuarterlyData()">Fetch Data</button>
                 </div>
               </div>
               <div class="row">
@@ -101,7 +136,20 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" id="2">
-              Data displayed based on tab selected <br/> 
+              <div class="row">
+                <div class="col-md-2">
+                  <h4> Enter Year </h4>
+                </div>               
+                <div class="col-md-4">
+                  <input type="text" id="year" class="form-control" required autofocus >
+                </div> 
+                <div class="col-md-4">
+                    <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchQuarterlyData()">Fetch Data</button>
+                </div>
+              </div>
+              <div class="row">
+                <div id="yearly_chart" style="width: 800px; height: 400px;"></div>
+              </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="3">
               Data displayed based on tab selected <br/> 

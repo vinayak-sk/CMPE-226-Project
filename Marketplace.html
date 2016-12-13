@@ -29,14 +29,23 @@
 	        	<div class="row" id="alertErrors" style="padding-left: 270px; padding-right: 280px;">
 				</div>
 
-	        	<form method="post" action="LandingPage.html">
+	        	<form method="post" action="">
+
+	        		<div class="row">
+		            	<div class="col-md-3" align="right">
+			            	<h5> User ID</h5>
+			            </div>
+		            	<div class="col-md-6">
+		                	<input type="text" id="user_id" class="form-control" autofocus>
+		            	</div>
+		            </div>
 
 		            <div class="row">
 		            	<div class="col-md-3" align="right">
 			            	<h5> Pokemon Eggs $5 per Egg</h5>
 			            </div>
 		            	<div class="col-md-6">
-		                	<input type="text" id="eggs" class="form-control" autofocus>
+		                	<input type="text" id="eggs" class="form-control">
 		            	</div>
 		            </div>
 
@@ -56,7 +65,7 @@
 			            	<h5> Pokeballs $1 per Pokeball</h5>
 			            </div>
 			            <div class="col-md-6">
-			            	<input type="password" id="pokeballs" class="form-control" >
+			            	<input type="text" id="pokeballs" class="form-control" >
 			            </div>
 		            </div>
 
@@ -65,7 +74,7 @@
 			            	<h5> Coins $1 per 10 coins</h5>
 			            </div>
 			            <div class="col-md-6">
-			            	<input type="email" id="coins" class="form-control">
+			            	<input type="text" id="coins" class="form-control">
 			            </div>
 		            </div>
 
@@ -74,7 +83,7 @@
 			            	<h5> Potions $5 per Potion</h5>
 			            </div>
 			            <div class="col-md-6">
-			            	<input type="email" id="potions" class="form-control">
+			            	<input type="text" id="potions" class="form-control">
 			            </div>
 		            </div> 
 
@@ -82,7 +91,7 @@
 		            	<div class="col-md-3">
 		            	</div>
 			            <div class="col-md-3">
-			            	<button class="btn btn-lg btn-info btn-block" type="submit" value="Submit" id="register">Buy</button>
+			            	<button class="btn btn-lg btn-info btn-block" value="Submit" id="register" onclick="buyItems()">Buy</button>
 			            </div>
 			            <div class="col-md-3">
 			            	<button class="btn btn-lg btn-info btn-block" id="cancel">Cancel</button>
@@ -99,14 +108,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
-			$.ajax({
-                  type: "POST",
-                  url: "battles.php",
-                  data: { action:"fetchYearlyData", year: year }
-              }).done(function( data ) {
-                  alert("success");
-              });
 
+function buyItems() {
+	alert($('#user_id').val());
+	$.ajax({
+		type: "POST",
+		url: "battles.php",
+		data: { 
+				action:"buyItems", 
+				user_id: $('#user_id').val(),
+				eggs: $('#eggs').val(),
+				sticks: $('#sticks').val(),
+				pokeballs: $('#pokeballs').val(),
+				coins: $('#coins').val(),
+				potions: $('#potions').val() 
+			}
+		}).done(function(data) {
+			alert(data);
+        });
+}
 </script>
 </body>
 </html>

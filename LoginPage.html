@@ -30,7 +30,7 @@
 
             <div class="row">
               <div class="">
-                  <input type="email" id="inputLoginId" class="form-control" placeholder="Login Id" required autofocus>
+                  <input type="text" id="inputLoginId" class="form-control" placeholder="Login Id" required autofocus>
               </div>
             </div>
 
@@ -47,7 +47,7 @@
                 <p><a href="">Create Acount/Forgot?</a></p>
               </div>
               <div class="col-md-6">
-                <button class="btn btn-lg btn-info btn-block" type="submit" id="login">Login</button>
+                <button class="btn btn-lg btn-info btn-block" onclick="loginPage()" id="login">Login</button>
               </div>
             </div>
 
@@ -64,14 +64,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
   <script type="text/javascript">
-              $.ajax({
+
+  function loginPage() {
+          //alert(typeof $('#inputLoginId').val());
+            $.ajax({
                   type: "POST",
                   url: "battles.php",
-                  data: { action:"fetchYearlyData", year: year }
+                  data: { action:"loginUser", user_id:$('#inputLoginId').val(), password: $('#inputPassword').val() }
               }).done(function( data ) {
-                  alert("success");
-              });
-  });
+                alert(data);                
+              })
+               .fail(function() {
+                  alert( "error" );
+                });
+  }
+             
+ 
   </script>
 
   </body>
