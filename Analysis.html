@@ -21,6 +21,7 @@
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
+      //Google function to draw the Bar chart
       function drawChart(quarter1, quarter2, quarter3, quarter4) {
         var data = google.visualization.arrayToDataTable([
          ['Quarter', 'Battle Per Quarter', { role: 'style' }],
@@ -38,15 +39,12 @@
         };
 
         var chart = new google.charts.Bar(document.getElementById('barchart_material'));
-        var yearly_chart = new google.charts.Bar(document.getElementById('yearly_chart'));
 
         chart.draw(data, options);
-
-        yearly_chart.draw(data, options);
-
       }
 
-      function fetchQuarterlyData() {
+      //Method used fetch Quarterly results according to the year entered
+      function fetchtQuarterlyData() {
               var year = $( "#year" ).val();
               alert(year);
               $.ajax({
@@ -55,9 +53,6 @@
                   data: { action:"getQuarterlyCount", year: year }
               }).done(function( data ) {
 
-                //alert("here");
-                //alert(JSON.stringify(data));
-                //alert(data[0]);
                 quarter1 = data[0];
                 quarter2 = data[1];
                 quarter3 = data[2];
@@ -70,26 +65,31 @@
               });
       }
 
+      //Method used fetch results according to the years
       function fetchYearlyData() {
               var year = $( "#year" ).val();
               alert(year);
               $.ajax({
                   type: "POST",
                   url: "olap.php",
-                  data: { action:"getQuarterlyCount", year: year }
+                  data: { action:"getYearlyCount"}
               }).done(function( data ) {
 
-                //alert("here");
-                //alert(JSON.stringify(data));
-                //alert(data[0]);
-                quarter1 = data[0];
-                quarter2 = data[1];
-                quarter3 = data[2];
-                quarter4 = data[3];
-                $.each(data, function(key,value) {
-                  //array.push(value);
-                })
-                drawChart(quarter1,quarter2,quarter3,quarter4);
+                $("#yearly_data").html(data);
+                //chart.draw(data, options);
+              });
+      }
+
+      function fetchMontlyData() {
+              var year = $( "#year_for_month" ).val();
+              //alert(year);
+              $.ajax({
+                  type: "POST",
+                  url: "olap.php",
+                  data: { action:"getMontlyCount", year: year }
+              }).done(function( data ) {
+
+                $("#monthly_data").html(data);
                 //chart.draw(data, options);
               });
       }
@@ -112,8 +112,8 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs tabs-heading" role="tablist">
             <li role="presentation" class="active tab-titles"><a href="#battle" aria-controls="home" role="tab" data-toggle="tab">Battle Quarterly Analysis</a></li>
-            <li role="presentation" class="tab-titles"><a href="#2" aria-controls="profile" role="tab" data-toggle="tab">Yearly Battles</a></li>
-            <li role="presentation" class="tab-titles"><a href="#3" aria-controls="messages" role="tab" data-toggle="tab">Analysis 3</a></li>
+            <li role="presentation" class="tab-titles"><a href="#2" aria-controls="profile" role="tab" data-toggle="tab">Yearly Battle Counts</a></li>
+            <li role="presentation" class="tab-titles"><a href="#3" aria-controls="profile" role="tab" data-toggle="tab">Monthly Battle Counts</a></li>
           </ul>
 
           <!-- Tab panes -->
@@ -127,7 +127,7 @@
                   <input type="text" id="year" class="form-control" required autofocus >
                 </div> 
                 <div class="col-md-4">
-                    <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchQuarterlyData()">Fetch Data</button>
+                    <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchtQuarterlyData()">Fetch Data</button>
                 </div>
               </div>
               <div class="row">
@@ -136,23 +136,29 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" id="2">
+                
+                <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchYearlyData()">Fetch Yearly Data</button>
+                <br>
+                <br>
+                <h3>Yearly Battle Counts</h3>
+                <label id="yearly_data"></label>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="3">
               <div class="row">
                 <div class="col-md-2">
                   <h4> Enter Year </h4>
                 </div>               
                 <div class="col-md-4">
-                  <input type="text" id="year" class="form-control" required autofocus >
+                  <input type="text" id="year_for_month" class="form-control" required autofocus >
                 </div> 
                 <div class="col-md-4">
-                    <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchQuarterlyData()">Fetch Data</button>
+                    <button id="fetchPokemon1" type="button" class="btn btn-primary" align="center" onclick="fetchMontlyData()">Fetch Data</button>
                 </div>
               </div>
               <div class="row">
-                <div id="yearly_chart" style="width: 800px; height: 400px;"></div>
-              </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="3">
-              Data displayed based on tab selected <br/> 
+                <h3>Monthly Battle Counts</h3>
+                <label id="monthly_data"></label>
+              </div> 
             </div>
           </div>
 

@@ -4,7 +4,7 @@
     <meta name="description" content="CMPE226 Project">
     <meta name="author" content="Chaotic Coders">
 
-    <title>Word</title>
+    <title>Pokemon Battle</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
 
@@ -19,7 +19,10 @@
               }).done(function( msg ) {
 
                   //alert("here");
-                  alert( "Data Saved: " + JSON.stringify(msg) );
+                  //alert( "Data Saved: " + JSON.stringify(msg) );
+                  var jsonText = JSON.parse(JSON.stringify(msg));
+
+                  $('#winner').text("Winner for this Pokemon battle is User "+ jsonText['winner']);
               });
           }
 
@@ -96,16 +99,16 @@
   <body>
 
   <header>
-	  <div class="row heading">
-	    <h2> <p align="center"> <label class="title" align="center"> Simulate Battle</label> </p> </h2>
-	  </div>
+    <div class="row heading">
+      <h2> <p align="center"> <label class="title" align="center"> Simulate Pokemon Battle</label> </p> </h2>
+    </div>
   </header>
 
   <div class="row">
     <div class="container">
-    	<div class="col-md-1">
-    		
-    	</div>
+      <div class="col-md-1">
+        
+      </div>
 
         <div class="col-md-10 block-2">
             <div class="row">
@@ -224,11 +227,18 @@
               <div class="col-md-5">
               </div>
             </div>
+            <div class="row">
+              
+              <div class="col-md-12">
+                <label id="winner"></label>
+              </div>
+              
+            </div>
         </div>
 
       <div class="col-md-1">
-    		
-    	</div>
+        
+      </div>
     </div> <!-- /container -->
   </div>
 
